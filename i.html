@@ -1,0 +1,265 @@
+<!-- loader.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LUXE · Loading</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #6c5ce7;
+      --secondary: #fd79a8;
+      --accent: #00b894;
+      --text: #2d3436;
+      --text-light: #b2bec3;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #1e1e2f 0%, #2d2d44 50%, #1e1e2f 100%);
+      overflow: hidden;
+      position: relative;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* animated background orbs */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.45;
+      animation: float 8s ease-in-out infinite;
+    }
+
+    .orb-1 {
+      width: 320px;
+      height: 320px;
+      background: var(--primary);
+      top: -100px;
+      left: -100px;
+      animation-delay: 0s;
+    }
+
+    .orb-2 {
+      width: 260px;
+      height: 260px;
+      background: var(--secondary);
+      bottom: -80px;
+      right: -80px;
+      animation-delay: 2s;
+    }
+
+    .orb-3 {
+      width: 200px;
+      height: 200px;
+      background: var(--accent);
+      top: 50%;
+      right: 10%;
+      animation-delay: 4s;
+      opacity: 0.25;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(30px, -30px) scale(1.1); }
+    }
+
+    /* loading container */
+    .loader-wrap {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 28px;
+      padding: 20px;
+      animation: fadeIn 0.6s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* logo */
+    .loader-logo {
+      font-size: 2.8rem;
+      font-weight: 700;
+      letter-spacing: -1px;
+      background: linear-gradient(135deg, #a29bfe, #fd79a8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.04); opacity: 0.9; }
+    }
+
+    /* spinner */
+    .spinner {
+      position: relative;
+      width: 84px;
+      height: 84px;
+    }
+
+    .spinner-ring {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 4px solid transparent;
+      animation: spin 1.2s linear infinite;
+    }
+
+    .spinner-ring:nth-child(1) {
+      border-top-color: var(--primary);
+      animation-duration: 1.2s;
+    }
+
+    .spinner-ring:nth-child(2) {
+      inset: 10px;
+      border-right-color: var(--secondary);
+      animation-duration: 1.6s;
+      animation-direction: reverse;
+    }
+
+    .spinner-ring:nth-child(3) {
+      inset: 20px;
+      border-bottom-color: var(--accent);
+      animation-duration: 2s;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* center icon */
+    .spinner-center {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 1.6rem;
+      animation: beat 1.2s ease-in-out infinite;
+    }
+
+    @keyframes beat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+    }
+
+    /* loading text */
+    .loader-text {
+      color: var(--text-light);
+      font-size: 0.95rem;
+      font-weight: 400;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .dots span {
+      animation: blink 1.4s infinite both;
+    }
+
+    .dots span:nth-child(2) { animation-delay: 0.2s; }
+    .dots span:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes blink {
+      0%, 80%, 100% { opacity: 0.2; }
+      40% { opacity: 1; }
+    }
+
+    /* progress bar */
+    .progress-bar {
+      width: 220px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 40px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: 40px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      animation: progress 3s ease-in-out forwards;
+      box-shadow: 0 0 12px rgba(108, 92, 231, 0.6);
+    }
+
+    @keyframes progress {
+      0% { width: 0%; }
+      25% { width: 35%; }
+      60% { width: 72%; }
+      100% { width: 100%; }
+    }
+
+    /* subtle footer */
+    .loader-footer {
+      position: absolute;
+      bottom: 24px;
+      color: rgba(255, 255, 255, 0.25);
+      font-size: 0.72rem;
+      letter-spacing: 0.5px;
+      z-index: 10;
+    }
+  </style>
+</head>
+<body>
+  <!-- background orbs -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <!-- loader -->
+  <div class="loader-wrap">
+    <div class="loader-logo">LUXE</div>
+
+    <div class="spinner">
+      <div class="spinner-ring"></div>
+      <div class="spinner-ring"></div>
+      <div class="spinner-ring"></div>
+      <div class="spinner-center"><i class="fas fa-gem"></i></div>
+    </div>
+
+    <div class="loader-text">
+      Preparing your experience
+      <span class="dots"><span>.</span><span>.</span><span>.</span></span>
+    </div>
+
+    <div class="progress-bar">
+      <div class="progress-fill"></div>
+    </div>
+  </div>
+
+  <div class="loader-footer">© LUXE — Modern Storefront</div>
+
+  <script>
+    // Redirect after 3 seconds
+    setTimeout(function () {
+      window.location.href = "https://awd-01.github.io/DEMOAPP/";
+    }, 3000);
+  </script>
+</body>
+</html>
